@@ -1,0 +1,9 @@
+---
+description: Commit message style
+alwaysApply: true
+---
+
+# Commits
+
+One sentence, capital start, ends with `.`, max 60 chars.
+No body unless asked. No Cursor attribution trailers.

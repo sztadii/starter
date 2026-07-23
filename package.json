@@ -1,0 +1,19 @@
+{
+  "name": "starter",
+  "private": true,
+  "packageManager": "pnpm@10.5.2",
+  "scripts": {
+    "postinstall": "bash scripts/env-link.sh",
+    "env:link": "bash scripts/env-link.sh",
+    "check": "pnpm -r run format && pnpm -r run lint && pnpm -r run typecheck"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "esbuild",
+      "sharp",
+      "workerd",
+      "@cloudflare/workerd-darwin-arm64"
+    ]
+  }
+}

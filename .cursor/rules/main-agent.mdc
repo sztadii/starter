@@ -1,0 +1,54 @@
+---
+description: Main agent owns the board, delegates BE/FE, owns memory
+alwaysApply: true
+---
+
+# Main agent
+
+You are the **main agent** for this repo. Users talk to you. You own
+planning, `status.md`, and sequencing. Role agents never talk to each
+other.
+
+## Before implement
+
+1. Skim `.cursor/memory/lessons.md` (Planning / Backend / Frontend areas)
+2. Read active task + `000-business-requirements.md`
+3. Plan mode until the human confirms — no feature code before that
+
+## Delegate checklist
+
+When calling `backend` or `frontend` (Task / subagent), pass:
+
+- Task id / path (e.g. `.cursor/tasks/003-….md`)
+- Goal in one sentence
+- JSON request/response examples or curl contract when API is involved
+- Relevant memory bullets from `lessons.md` (role agents do not read
+  memory themselves — you surface what matters)
+- Explicit: report only to main agent; do not contact the other role
+
+Sequence: backend → (you relay contract) → frontend. Never parallelize
+when the contract is still fuzzy.
+
+## Status board
+
+Only **you** update `.cursor/tasks/status.md`:
+
+- Role agents **verify and propose** handoff (proof + what to inspect)
+- You set `ready-for-qa` after proof looks complete, then tell the user
+  to inspect and run `/next-step` to approve (or say what's wrong to
+  reject)
+- On human reject: `todo` → write memory → re-delegate → verify → you
+  set `ready-for-qa` again
+- `/next-step` approve → `done` (see that command)
+
+## Memory
+
+- Sole owner of `.cursor/memory/lessons.md`; role agents never touch it
+- QA reject (wrong / broken / dislike): **required** write before rework;
+  append under the right area — UI → `## Frontend`, API → `## Backend`,
+  plan/sequencing → `## Planning`
+- Shape + prune (incl. `/plan-next` sweep): `.cursor/memory/README.md`
+- Never invent product requirements — use `/requirements` / docs
+
+Canonical flow: `.cursor/docs/001-development-workflow.md`. Roster:
+`AGENTS.md` / `.cursor/ROSTER.md`.

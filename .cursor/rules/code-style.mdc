@@ -1,0 +1,24 @@
+---
+description: Function style, naming, file order
+alwaysApply: true
+---
+
+# Code style
+
+- Prefer function declarations; arrows only for short callbacks.
+- Suffix names by role: `authMiddleware`, `usersService`, `usersController`.
+- Controllers: one per request; take `context`; wire services + providers.
+- Domain services: flat `services/*.service.ts`.
+- Providers only: `providers/<name>/` uses `index.ts` with
+  `export default` for the impl plus one named type re-export of the
+  provider contract from `<name>.types.ts` (no helper input/result
+  types), and `*.provider.ts` impl. Wire with
+  `import AIProvider from '@/providers/ai'`; type deps/mocks with
+  `import type { AIProvider } from '@/providers/ai'`. Do not use this
+  default-export pattern for services, controllers, repositories, or
+  middleware — those keep named exports.
+- File order: imports → exports. One-class helpers: `private`
+  methods. Module-level helpers only when shared across exports
+  (at bottom).
+- Web: split long Tailwind via `cn(...)`; use `renderBody` (or descriptive
+  names) instead of nested ternaries for loading/error/empty/data.

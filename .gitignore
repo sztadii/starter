@@ -1,0 +1,18 @@
+.DS_Store
+.idea/
+node_modules/
+dist/
+.next/
+.open-next/
+.vinext/
+out/
+.wrangler/
+.env.development
+.env.production
+.env.local
+.env.*.local
+*.local
+# app env symlinks (canonical files live at repo root)
+apps/*/.env.development
+apps/*/.env.production
+*.tsbuildinfo

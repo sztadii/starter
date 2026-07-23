@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --color-background: #e8f0f2;
+  --color-foreground: #0f1c24;
+  --color-card: #f4f8f9;
+  --color-muted: #5a6d76;
+  --color-border: #c5d4db;
+  --color-primary: #0f1c24;
+  --color-primary-foreground: #f4f8f9;
+  --color-accent: #1f7a6c;
+  --color-destructive: #9b2c2c;
+  --radius-lg: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply m-0 min-h-svh bg-background font-sans text-foreground antialiased;
+    background-image:
+      radial-gradient(
+        80% 50% at 10% -10%,
+        rgb(31 122 108 / 0.22),
+        transparent 55%
+      ),
+      radial-gradient(
+        60% 40% at 100% 0%,
+        rgb(15 28 36 / 0.08),
+        transparent 50%
+      ),
+      linear-gradient(180deg, #e8f0f2 0%, #dce8ec 100%);
+  }
+}
