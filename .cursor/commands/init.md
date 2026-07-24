@@ -1,13 +1,13 @@
 ---
-description: First setup — prereqs, rename, Cloudflare, deploy, private GitHub
-argument-hint: [kebab-case-prefix]
+description: First setup — rename from folder, prereqs, Cloudflare, deploy, private GitHub
 ---
 
 # Init
 
-First setup after clone: check tooling, rename `starter` branding,
-install deps, create Cloudflare resources, first deploy + smoke, private
-GitHub. Business requirements come next via `/requirements`.
+First setup after clone: rename branding from the repo folder name,
+check tooling, install deps, create Cloudflare resources, first deploy
++ smoke, private GitHub. Business requirements come next via
+`/requirements`.
 
 ## Flow position
 
@@ -17,11 +17,19 @@ See `.cursor/docs/001-development-workflow.md` § First action.
 
 ## Resolve `<prefix>`
 
-Kebab-case package name from root `package.json` `name`.
+Always from the workspace folder basename (not `$ARGUMENTS`, not a
+prompt). Normalize to kebab-case: lowercase; replace spaces/`_` with
+`-`; collapse repeated `-`.
 
-If it is still `starter`, ask once for the new prefix. If `$ARGUMENTS`
-is provided, use that instead. If `name` is already not `starter`,
-confirm before re-renaming / re-creating resources.
+Examples: `Thai Restaurant` → `thai-restaurant`, `acme_notes` →
+`acme-notes`, `AcmeNotes` → `acmenotes` (prefer already-kebab folders).
+
+If folder basename is still `starter`, stop and ask the user to rename
+the folder to the product name, then re-run `/init`.
+
+If root `package.json` `name` is already not `starter` and differs from
+the folder-derived prefix, confirm before re-renaming / re-creating
+resources.
 
 ## Naming map
 
@@ -35,7 +43,19 @@ confirm before re-renaming / re-creating resources.
 | init user / password | `thai-restaurant` / `thai-restaurant` |
 | UI / README display | `Thai Restaurant` |
 
-## 1. Hard gate — local tooling
+## 1. Rename starter branding
+
+Do this before any tooling gates.
+
+1. Resolve `<prefix>` from the folder name (above).
+2. Search the repo for `starter` and `Starter` (config, env examples,
+   web brand, health fallback, SQL seed, docs, migrate scripts).
+3. Rename every hit using the naming map — including init-user SQL seed
+   and `INIT_USERNAME` / `INIT_PASSWORD` (both = `<prefix>`; never
+   `init` / `password`). Leave `preview_database_id` as `local`.
+4. Update copied/local `.env*` if present the same way.
+
+## 2. Hard gate — local tooling
 
 Stop until every check passes. On failure: fix, re-run, then continue.
 
@@ -43,15 +63,6 @@ Stop until every check passes. On failure: fix, re-run, then continue.
 | --- | --- |
 | `node -v` | Node `>=22.12` |
 | `pnpm -v` | pnpm present (else `corepack enable && corepack prepare pnpm@10.5.2 --activate`) |
-
-## 2. Rename starter branding
-
-1. Search the repo for `starter` and `Starter` (config, env examples,
-   web brand, health fallback, SQL seed, docs, migrate scripts).
-2. Rename every hit using the naming map — including init-user SQL seed
-   and `INIT_USERNAME` / `INIT_PASSWORD` (both = `<prefix>`; never
-   `init` / `password`). Leave `preview_database_id` as `local`.
-3. Update copied/local `.env*` if present the same way.
 
 ## 3. Install deps
 
@@ -121,5 +132,6 @@ Teardown later: `/delete`.
 ## Do not
 
 - Write business requirements or task backlog (that is `/requirements`)
+- Ask for a prefix (always folder name) or accept `$ARGUMENTS` as prefix
 - Skip Node / pnpm or wrangler / `gh` gates
 - Run destructive production checks

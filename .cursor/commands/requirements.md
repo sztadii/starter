@@ -53,8 +53,8 @@ continuing.
 ### 1–7. Product shape (after problem is clear)
 
 1. **Name / prefix** — confirm root `package.json` `name` (set by
-   `/init`). If the user wants a different prefix, stop and re-run
-   `/init` before writing requirements
+   `/init` from the folder name). If the user wants a different
+   prefix, stop: rename the folder, re-run `/init`, then continue
 2. **One-line pitch** — what it does (must map to the problem)
 3. **Users** — who and why (tie to who feels the pain)
 4. **Core flows** — primary happy path + secondary flows that

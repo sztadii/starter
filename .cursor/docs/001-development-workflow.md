@@ -20,7 +20,7 @@ files implement that spec; they do not redefine product rules.
 
 ## First action after clone / reuse
 
-1. `/init` — prereqs, rename, Cloudflare, deploy, GitHub
+1. `/init` — rename from folder, prereqs, Cloudflare, deploy, GitHub
 2. `/requirements` — deep problem analysis; confirm + commit backlog
 3. Plan mode for the first unblocked `todo` before coding
 
@@ -105,7 +105,7 @@ Memory never overrides conversation, code, or platform docs.
 
 | Command | Purpose |
 |---------|---------|
-| `/init` | Prereqs, rename, Cloudflare, first deploy, private GitHub |
+| `/init` | Rename from folder, prereqs, Cloudflare, first deploy, private GitHub |
 | `/requirements` | Deep problem analysis → confirm + commit requirements + backlog |
 | `/plan-next` | Next slice problem analysis → confirm + commit |
 | `/deploy` | Optional ad-hoc deploy + prod smoke |
