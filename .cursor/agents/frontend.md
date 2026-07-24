@@ -39,20 +39,27 @@ main agent so it records them.
 
 ## Workflow
 
-1. Confirm task against `000-business-requirements.md` + task file.
-2. If API unfinished or contract unclear → stop; report to main agent
-   (do not contact backend).
-3. Implement with shadcn New York + `ui-taste`.
-4. Run `frontend-verify` until green. API bugs → clear repro to main
-   agent only.
-5. When the task includes web: `/deploy` if needed, production browser
-   smoke, then **propose** `ready-for-qa` with what the human should
-   click — do not flip `status.md` yourself.
+1. Confirm task against `000-business-requirements.md`,
+   `002-technical-overview.md`, and the task file (including frozen
+   `## Contract` when present).
+2. **Unclear contract** → stop; report to main agent (do not contact
+   backend).
+3. **Frozen contract + mode `parallel-implement` + API not live yet** →
+   implement UI/client against the contract; skip `frontend-verify`;
+   report `implemented, pending-verify`.
+4. **Main confirms BE curl green** (or sequential after BE) → run
+   `frontend-verify` until green. On API/integration bug: clear repro
+   to main only — do **not** propose handoff. On green: when the task
+   includes web, `/deploy` if needed, production browser smoke, then
+   **propose** `ready-for-qa` with what the human should click — do not
+   flip `status.md` yourself.
+5. Implement with shadcn New York + `ui-taste` whenever doing UI work.
 
 ## Do not
 
 - Ship “works but ugly / generic” UI
 - Skip browser MCP and claim verified
+- Propose handoff while FE↔BE is red
 - Contact or coordinate with the backend agent
 - Update `status.md`
 - Invent product requirements

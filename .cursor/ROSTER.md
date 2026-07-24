@@ -5,7 +5,9 @@ Skill allowlists for role agents. **Canonical flow** lives in
 Main agent brief: [`.cursor/rules/main-agent.mdc`](rules/main-agent.mdc).
 
 Users do not invoke these agents. The main agent delegates. `backend` and
-`frontend` never communicate with each other.
+`frontend` never communicate with each other. Parallel implement is
+allowed when the API contract is frozen; FE owns FE↔BE verify after BE
+curl is green.
 
 | Agent | Owns | Skills |
 |-------|------|--------|

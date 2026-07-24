@@ -8,7 +8,7 @@ alwaysApply: true
 1. Current conversation
 2. Current code
 3. Platform docs (Cloudflare, Hono, Vite)
-4. `.cursor/docs/` (business requirements + development workflow)
+4. `.cursor/docs/` (business requirements, technical overview, workflow)
 5. `.cursor/tasks/status.md` + active task file
 6. `.cursor/memory/lessons.md` (main-agent lessons — see `.cursor/memory/README.md`; prune when noisy)
 7. Older tasks only if asked

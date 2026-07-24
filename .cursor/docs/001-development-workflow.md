@@ -11,18 +11,22 @@ single human inspection gate.
 
 | Location | Contents |
 |----------|----------|
-| `.cursor/docs/` | Business requirements + this workflow |
+| `.cursor/docs/` | Business requirements, technical overview, this workflow |
 | `.cursor/tasks/` | Task files + `status.md` |
 | `.cursor/memory/` | Main-agent lessons (`lessons.md`; Planning / Backend / Frontend areas) |
 
-Read `000-business-requirements.md` before implementing any task. Task
-files implement that spec; they do not redefine product rules.
+Read `000-business-requirements.md` and `002-technical-overview.md`
+before implementing any task. Task files implement that spec; they do
+not redefine product rules. Per-route API contracts live on the task
+(`## Contract`), not in the overview.
 
 ## First action after clone / reuse
 
 1. `/init` — rename from folder, prereqs, Cloudflare, deploy, GitHub
-2. `/requirements` — deep problem analysis; confirm + commit backlog
-3. Plan mode for the first unblocked `todo` before coding
+2. `/requirements` — deep problem analysis; confirm + commit backlog +
+   technical overview
+3. Plan mode for the first unblocked `todo` before coding (freeze
+   `## Contract` when API is involved)
 
 ## Ongoing loop (user-facing)
 
@@ -39,7 +43,8 @@ Teardown: `/delete`. Users do not call role agents.
 
 - **Naming:** `NNN-short-slug.md`
 - **Never rename** for status
-- **Contents:** title, goal, `## Subtasks` (max 5); no status/code/checkboxes
+- **Contents:** title, goal, `## Subtasks` (max 5); `## Contract` when
+  API is involved; no status/code/checkboxes
 - **Order:** numeric; respect `Blocked by` in `status.md`
 
 ## Status board
@@ -62,7 +67,9 @@ Rules:
 ## Proof before `ready-for-qa`
 
 Do not set `ready-for-qa` until proof passes. Main agent sets the status
-after the role agent reports green.
+after the role agent reports green. Incomplete or failing FE↔BE proof =
+do not flip the board. Human inspection is product/taste only — never
+the place FE↔BE wiring breaks are found.
 
 | Area | Proof |
 |------|--------|
@@ -77,13 +84,21 @@ Never destructive checks in production.
 
 1. Pick active task (lowest unblocked non-`done`)
 2. Skim `.cursor/memory/lessons.md` (Planning / Backend / Frontend)
-3. Plan mode — no feature code until confirmed
+3. Plan mode — freeze `## Contract` (or mark N/A for FE-only / BE-only);
+   no feature code until confirmed
 4. Delegate `backend` and/or `frontend` (checklist in
    `.cursor/rules/main-agent.mdc`). They never talk to each other; you
    relay contracts and repros.
-5. Collect verify proof; if incomplete, re-delegate
-6. You set `ready-for-qa`; summarize what to inspect and tell the user to
-   run `/next-step` to approve (or say what's wrong to reject)
+   - **Contract frozen** → parallel implement (one turn, two Tasks;
+     named titles; cheaper models OK for implement)
+   - **Contract fuzzy** → backend first, then frontend
+5. Collect BE curl proof; if red, fix BE before FE verify
+6. FE `frontend-verify` (resume FE if it already implemented against the
+   contract). On FE↔BE fail: re-delegate BE and/or FE with the repro;
+   repeat until green
+7. Only then set `ready-for-qa`; summarize what to inspect (product /
+   taste) and tell the user to run `/next-step` to approve (or say
+   what's wrong to reject)
 
 ### Human QA reject
 
@@ -106,7 +121,7 @@ Memory never overrides conversation, code, or platform docs.
 | Command | Purpose |
 |---------|---------|
 | `/init` | Rename from folder, prereqs, Cloudflare, first deploy, private GitHub |
-| `/requirements` | Deep problem analysis → confirm + commit requirements + backlog |
+| `/requirements` | Deep problem analysis → confirm + commit requirements, tech overview, backlog |
 | `/plan-next` | Next slice problem analysis → confirm + commit |
 | `/deploy` | Optional ad-hoc deploy + prod smoke |
 | `/delete` | Tear down Cloudflare + GitHub |
@@ -116,6 +131,6 @@ Memory never overrides conversation, code, or platform docs.
 
 - First product: `/init` → `/requirements`, then Plan for first `todo`
 - Next slice: `/plan-next` only when every task is `done`
-- Each task: Plan before Agent coding
+- Each task: Plan before Agent coding (freeze contract when API)
 - After `/next-step` → `done`, Plan the next `todo` (or `/plan-next` if
   backlog complete)

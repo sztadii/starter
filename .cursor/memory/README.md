@@ -85,5 +85,5 @@ pasted stacks, “user unhappy / will fix” with no do/don’t.
   from controllers.
 - **Frontend:** screenshot OK but console error → re-check console +
   network after each click.
-- **Planning:** FE before stable response shape → plan needs JSON examples;
-  don’t parallelize fuzzy contracts.
+- **Planning:** parallel FE/BE only after frozen contract; verify still
+  BE→FE; never hand FE↔BE wiring breaks to human inspect.

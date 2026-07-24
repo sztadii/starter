@@ -24,8 +24,9 @@ Do **not** use this for first clone setup — that is `/init` →
 1. Every task in `status.md` is `done`.
 2. `.cursor/docs/000-business-requirements.md` is filled (not still the
    template banner).
-3. Read current requirements, `.cursor/tasks/status.md`, and existing
-   task files so the next slice builds on what already shipped.
+3. Read current requirements, `.cursor/docs/002-technical-overview.md`,
+   `.cursor/tasks/status.md`, and existing task files so the next slice
+   builds on what already shipped.
 4. **Prune memory** — standalone sweep of `.cursor/memory/lessons.md`:
    drop entries whose code/task is shipped or gone, and trim any area
    section over ~15 entries oldest-first (see `.cursor/memory/README.md`).
@@ -52,7 +53,7 @@ Do not invent a parallel product. Tie the slice back to
 `000-business-requirements.md` Problem analysis (amend it if the
 understanding of the problem changed).
 
-### 1–7. Slice shape
+### 1–8. Slice shape
 
 1. **Goal of this slice** — what we are adding or changing now
 2. **Users** — who is affected (new or existing)
@@ -63,6 +64,9 @@ understanding of the problem changed).
 7. **Requirements deltas** — what to add/change in
    `000-business-requirements.md` (keep prior truth; amend, don’t invent
    a parallel product)
+8. **Technical overview deltas** — what to add/change in
+   `002-technical-overview.md` (stack, auth, entities, integrations,
+   deferred). No endpoint JSON.
 
 Reuse the product name / prefix unless the user is renaming on purpose.
 
@@ -89,16 +93,18 @@ In the Plan, present:
 1. Proposed edits to `.cursor/docs/000-business-requirements.md`
    (deltas only — show what changes). Include Problem analysis updates
    when the slice reframes or extends the problem.
-2. Proposed new `.cursor/tasks/NNN-*.md` files (continue numbering after
+2. Proposed edits to `.cursor/docs/002-technical-overview.md` (deltas
+   only — light tech; no endpoint JSON).
+3. Proposed new `.cursor/tasks/NNN-*.md` files (continue numbering after
    the highest existing `NNN`; max 5 subtasks each). Each task should
    advance this slice’s sharpest cut.
-3. Proposed `status.md` rows for those new tasks (`todo` + blockers).
+4. Proposed `status.md` rows for those new tasks (`todo` + blockers).
    Do not rewrite history of `done` rows unless correcting a mistake.
 
 Wait for explicit confirmation. Only then switch to Agent mode and:
 
-1. Write the confirmed requirements deltas, new task files, and
-   `status.md` rows (still no feature code).
+1. Write the confirmed requirements deltas, technical overview deltas,
+   new task files, and `status.md` rows (still no feature code).
 2. Review the diff and commit only those confirmed requirements/backlog
    files. This command is an explicit commit request — do not ask again
    when the scope is clean. Follow `.cursor/rules/commits.mdc`; do not

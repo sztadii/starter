@@ -7,6 +7,7 @@ Product requirements and the development workflow live in `.cursor/docs/`:
 
 - `000-business-requirements.md` — what we build
 - `001-development-workflow.md` — statuses, Plan mode, human gate, commands
+- `002-technical-overview.md` — light tech direction (no endpoint JSON)
 
 ## Status and blockers
 
@@ -39,9 +40,26 @@ One-sentence goal.
 
 1. …
 2. …
+
+## Contract
+
+`METHOD /path` — auth …
+
+Request:
+{ ... }
+
+Response 200:
+{ ... }
+
+Errors: 401 / 404 / …
 ```
 
 Max 5 subtasks. Optional notes / acceptance hints below.
+
+**`## Contract`:** required when the task touches the API. Freeze in Plan
+mode before coding (method, path, auth, request/response examples,
+important errors). FE-only / BE-only tasks omit it and note N/A. Do not
+put endpoint JSON in `002-technical-overview.md`.
 
 ## Creating the backlog
 

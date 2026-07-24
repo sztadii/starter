@@ -34,11 +34,18 @@ agent so it records them.
 
 ## Workflow
 
-1. Confirm task against `000-business-requirements.md` + task file.
-2. Implement controller → service → provider (`api-hono`).
-3. Follow `.cursor/rules/code-style.mdc`.
-4. Run `backend-verify` until green.
-5. Report to main agent: curl proof, response shapes, blockers. For
+1. Confirm task against `000-business-requirements.md`,
+   `002-technical-overview.md`, and the task file (including frozen
+   `## Contract` when present).
+2. When delegated in parallel (`parallel-implement`), implement exactly
+   to the frozen contract — do not invent fields. Report any unavoidable
+   contract drift to main only.
+3. Implement controller → service → provider (`api-hono`).
+4. Follow `.cursor/rules/code-style.mdc`.
+5. Run `backend-verify` until green.
+6. When re-delegated after an FE integration repro: fix to match the
+   contract, re-run curl, report.
+7. Report to main agent: curl proof, response shapes, blockers. For
    API-only close-out, include deploy smoke proof and **propose**
    `ready-for-qa` — do not flip `status.md` yourself.
 
@@ -47,5 +54,5 @@ agent so it records them.
 - Edit `apps/web` unless asked
 - Contact or coordinate with the frontend agent
 - Update `status.md`
-- Invent product requirements
+- Invent product requirements or invent API fields beyond the contract
 - Read or write `.cursor/memory/` (main agent owns it)

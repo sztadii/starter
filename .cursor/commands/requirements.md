@@ -65,6 +65,19 @@ continuing.
 7. **Out of scope** — explicit non-goals for v1 (including problem
    facets deferred from §0)
 
+### 8. Light technical overview (after product shape)
+
+Fill `.cursor/docs/002-technical-overview.md` — bullets only:
+
+- Stack (note deviations from starter)
+- Auth style and roles
+- Main entities and ownership
+- Integrations (or none)
+- Deferred tech
+
+**No** routes or request/response JSON here. Per-task contracts freeze
+later in Plan mode on each task file (`## Contract`).
+
 ## Find problems early
 
 While interviewing, actively probe for:
@@ -90,14 +103,17 @@ In the Plan, present:
 1. Draft `.cursor/docs/000-business-requirements.md` (remove the
    `TEMPLATE — unfilled` banner once filled). Include a filled
    **Problem analysis** section — not a stub.
-2. Proposed `.cursor/tasks/NNN-*.md` titles + subtasks (max 5 each).
+2. Draft `.cursor/docs/002-technical-overview.md` (remove the
+   `TEMPLATE — unfilled` banner once filled). Light tech only — no
+   endpoint JSON.
+3. Proposed `.cursor/tasks/NNN-*.md` titles + subtasks (max 5 each).
    Each task should clearly advance the problem’s sharpest cut.
-3. Proposed `.cursor/tasks/status.md` table (`todo` / blockers)
+4. Proposed `.cursor/tasks/status.md` table (`todo` / blockers)
 
 Wait for explicit confirmation. Only then switch to Agent mode and:
 
-1. Write the confirmed requirements doc, task files, and `status.md`
-   (still no feature code).
+1. Write the confirmed requirements doc, technical overview, task
+   files, and `status.md` (still no feature code).
 2. Review the diff and commit only those confirmed requirements/backlog
    files. This command is an explicit commit request — do not ask again
    when the scope is clean. Follow `.cursor/rules/commits.mdc`; do not
@@ -106,13 +122,14 @@ Wait for explicit confirmation. Only then switch to Agent mode and:
 ## After confirmation
 
 After the requirements commit succeeds, Plan mode for the first
-unblocked `todo` before coding.
+unblocked `todo` before coding (freeze `## Contract` when API).
 
 ## Do not
 
 - Invent product requirements or a backlog without confirmation
 - Skip deep problem analysis or treat it as optional fluff
 - Jump to features/screens before the problem is agreed
+- Put per-route request/response JSON in the technical overview
 - Rename branding, deploy, or implement features in this command
   (setup is `/init`)
 - Skip open risks without user acknowledgment

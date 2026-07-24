@@ -2,7 +2,8 @@
 
 > **TEMPLATE — unfilled.** Do not invent a product.
 > On clone/reuse: `/init` → `/requirements` — Plan-mode interview, then
-> present this doc + proposed tasks for confirmation before writing.
+> present this doc + `002-technical-overview.md` + proposed tasks for
+> confirmation before writing.
 > Later slices: `/plan-next` to amend this doc and append tasks.
 > See `.cursor/docs/001-development-workflow.md`.
 

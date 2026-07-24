@@ -12,8 +12,10 @@ other.
 ## Before implement
 
 1. Skim `.cursor/memory/lessons.md` (Planning / Backend / Frontend areas)
-2. Read active task + `000-business-requirements.md`
-3. Plan mode until the human confirms — no feature code before that
+2. Read active task + `000-business-requirements.md` +
+   `002-technical-overview.md`
+3. Plan mode until the human confirms — freeze `## Contract` on API
+   tasks; no feature code before that
 
 ## Delegate checklist
 
@@ -21,22 +23,36 @@ When calling `backend` or `frontend` (Task / subagent), pass:
 
 - Task id / path (e.g. `.cursor/tasks/003-….md`)
 - Goal in one sentence
-- JSON request/response examples or curl contract when API is involved
+- Frozen `## Contract` block verbatim when API is involved
+- Mode: `parallel-implement` or `sequential`
 - Relevant memory bullets from `lessons.md` (role agents do not read
   memory themselves — you surface what matters)
 - Explicit: report only to main agent; do not contact the other role
+- Short UI `description` title, e.g. `Backend: 003 auth API`,
+  `Frontend: 003 login UI`, `Frontend verify: 003 FE↔BE`
 
-Sequence: backend → (you relay contract) → frontend. Never parallelize
-when the contract is still fuzzy.
+## Sequencing
+
+- **Parallel when contract frozen** — one turn, two Task launches; both
+  get the same contract. Prefer cheaper models (e.g. Composer) for
+  implement; keep the powerful model on main for Plan/orchestrate.
+- **Sequential when fuzzy** — backend → relay proven shapes → frontend.
+  Never parallelize when the contract is still fuzzy.
+- **Verify order always** — `backend-verify` (curl) before
+  `frontend-verify` (browser). FE may implement in parallel; it must not
+  claim FE↔BE verified until curl is green.
+- **No `ready-for-qa` without green FE↔BE** — if browser/HTTP/console
+  shows an integration failure, re-delegate and re-verify; never hand
+  wiring bugs to the human. Human inspection is product/taste only.
 
 ## Status board
 
 Only **you** update `.cursor/tasks/status.md`:
 
 - Role agents **verify and propose** handoff (proof + what to inspect)
-- You set `ready-for-qa` after proof looks complete, then tell the user
-  to inspect and run `/next-step` to approve (or say what's wrong to
-  reject)
+- You set `ready-for-qa` after proof looks complete (including green
+  FE↔BE when the task has web), then tell the user to inspect and run
+  `/next-step` to approve (or say what's wrong to reject)
 - On human reject: `todo` → write memory → re-delegate → verify → you
   set `ready-for-qa` again
 - `/next-step` approve → `done` (see that command)

@@ -11,13 +11,15 @@ Memory: `.cursor/memory/`. Roster details: [`.cursor/ROSTER.md`](.cursor/ROSTER.
 
 | Who | Role |
 |-----|------|
-| Human | Lifecycle commands + inspect QA |
-| Main agent (this chat) | Plan, delegate, own `status.md` + `memory/lessons.md`, relay BE↔FE |
+| Human | Lifecycle commands + inspect QA (product/taste — not FE↔BE wiring) |
+| Main agent (this chat) | Plan, freeze contracts, delegate, own `status.md` + `memory/lessons.md`, relay BE↔FE |
 | `backend` | API only; curl verify; report to main agent |
-| `frontend` | UI + browser FE↔BE verify; report to main agent |
+| `frontend` | UI + browser FE↔BE verify (owns integration until green); report to main agent |
 
 Users never invoke role agents. `backend` and `frontend` **never talk to
-each other** — only to the main agent.
+each other** — only to the main agent. When the API contract is frozen,
+main may launch both in parallel for implement; FE↔BE verify still runs
+after BE curl is green.
 
 ## Roster
 
