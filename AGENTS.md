@@ -26,7 +26,7 @@ after BE curl is green.
 | Agent | Skills |
 |-------|--------|
 | `backend` | `api-hono`, `backend-verify` |
-| `frontend` | `ui-taste`, `frontend-verify` |
+| `frontend` | `design-taste-frontend`, `frontend-verify` |
 
 Memory: one file [`.cursor/memory/lessons.md`](.cursor/memory/lessons.md),
 owned by the **main agent only**. Role agents never read or write it.

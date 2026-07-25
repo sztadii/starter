@@ -65,11 +65,11 @@ For every changed flow, **click the UI** — do not only load the page.
   error boundaries) even if the rest of the layout still looks fine.
 - Also fail on: layout breaks, missing content, wrong colors, overflow,
   misaligned controls, empty states that should have data.
-- **Taste bar (required):** apply `.cursor/skills/ui-taste/SKILL.md`
-  Guarantee. Fail if the UI reads as generic AI/SaaS chrome, cluttered
-  first viewport, card-everything, purple-glow slop, or weak hierarchy
-  vs the Linear / Cloudflare / Warp north star. “Works but ugly” is
-  fail — redesign before handoff.
+- **Taste bar (required):** apply
+  `.cursor/skills/design-taste-frontend/SKILL.md`. Fail if pre-flight
+  would not pass, or the UI reads as generic AI/SaaS chrome,
+  purple-glow slop, templated card grids, or weak hierarchy. “Works but
+  ugly” is fail — redesign before handoff.
 - Optional responsive: narrow + wide viewport via CDP
   `Emulation.setDeviceMetricsOverride` (e.g. 390×844 and 1280×800),
   screenshot each, then clear override.

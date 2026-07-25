@@ -12,7 +12,7 @@ curl is green.
 | Agent | Owns | Skills |
 |-------|------|--------|
 | `backend` | `apps/server` (curl) | `api-hono`, `backend-verify` |
-| `frontend` | `apps/web` + browser FE↔BE | `ui-taste`, `frontend-verify` |
+| `frontend` | `apps/web` + browser FE↔BE | `design-taste-frontend`, `frontend-verify` |
 
 Memory: single file `.cursor/memory/lessons.md`, owned by the **main
 agent only**. Role agents never read or write it — the main agent passes
@@ -22,7 +22,7 @@ relevant bullets on delegation.
 
 | Skill | Path |
 |-------|------|
-| `ui-taste` | `.cursor/skills/ui-taste/SKILL.md` |
+| `design-taste-frontend` | `.cursor/skills/design-taste-frontend/SKILL.md` |
 | `frontend-verify` | `.cursor/skills/frontend-verify/SKILL.md` |
 | `api-hono` | `.cursor/skills/api-hono/SKILL.md` |
 | `backend-verify` | `.cursor/skills/backend-verify/SKILL.md` |
