@@ -7,6 +7,10 @@ description: Deploy server and web to Cloudflare with env sync and smoke checks
 Deploy both Cloudflare apps correctly — migrations, secrets, URL sync,
 and production smoke. Do not skip steps.
 
+**User-triggered only.** Task verification and `ready-for-qa` stay
+local; do not run this command as part of the implement → QA loop
+unless the user asked to ship.
+
 Use `pnpm run deploy` (never `pnpm deploy`). First-time rename,
 D1/KV/R2 create, and private GitHub belong to `/init`. This command
 assumes bindings already exist with real remote ids.
@@ -70,11 +74,11 @@ Do not claim success until these pass. Non-destructive only.
 | Init-user login against `$VITE_API_URL` using `INIT_*` from `.env.production` | success (curl; same as `backend-verify`) |
 
 If any check fails: fix, redeploy the affected app, re-smoke. Do not
-hand off as deployed.
+claim success as deployed.
 
-Tasks with web UI still need production browser QA via
-`frontend-verify` (click the UI; fail on unexpected console/HTTP/UI
-errors). Curl alone is not enough.
+For web UI, also run a short production browser smoke via
+`frontend-verify` against the deployed URL (click primary flows; fail
+on unexpected console/HTTP/UI errors). Curl alone is not enough for web.
 
 ## Report
 
@@ -82,14 +86,13 @@ Summarize:
 
 - Server URL + web URL
 - Whether `VITE_API_URL` was updated
-- Smoke results (health, web, login)
+- Smoke results (health, web, login; browser if web)
 - Any skipped/missing resources
 
 ## After deploy
 
-`/deploy` is ad-hoc and does not change the board. Return to the active
-task; when its proof is complete the main agent sets `ready-for-qa` and
-the user runs `/next-step`.
+`/deploy` is ad-hoc and does not change the board. It is independent of
+`ready-for-qa` / `/next-step`.
 
 ## Do not
 

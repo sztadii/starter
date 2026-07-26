@@ -48,16 +48,16 @@ curl -sS -X POST http://127.0.0.1:4000/auth/login \
 ```
 
 Assert success JSON / token; then curl authenticated routes with that
-token. Prefer local first; production via `$VITE_API_URL` only for
-non-destructive checks. Never destructive checks in production.
+token. Task verification is **local only** (`http://127.0.0.1:4000`).
+Do not deploy or hit production unless the user ran `/deploy`.
 
 ## Scope
 
 - Only verify server. Do not contact the frontend agent — report API
   gaps to the main agent.
-- Do not deploy unless asked or the task workflow requires `/deploy`.
+- Do not deploy unless the user asked (`/deploy`).
 - Do not edit `.cursor/tasks/status.md`; propose handoff to the main
-  agent when proof is green.
+  agent when local proof is green.
 
 ## Report
 

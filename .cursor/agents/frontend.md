@@ -51,11 +51,10 @@ main agent so it records them.
    implement UI/client against the contract; skip `frontend-verify`;
    report `implemented, pending-verify`.
 4. **Main confirms BE curl green** (or sequential after BE) → run
-   `frontend-verify` until green. On API/integration bug: clear repro
-   to main only — do **not** propose handoff. On green: when the task
-   includes web, `/deploy` if needed, production browser smoke, then
-   **propose** `ready-for-qa` with what the human should click — do not
-   flip `status.md` yourself.
+   `frontend-verify` until green (local only). On API/integration bug:
+   clear repro to main only — do **not** propose handoff. On green:
+   **propose** `ready-for-qa` with what the human should click locally
+   — do not flip `status.md` yourself. Do not `/deploy` unless asked.
 5. Implement with existing shadcn primitives + `design-taste-frontend`
    whenever doing UI work.
 

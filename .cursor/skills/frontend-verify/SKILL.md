@@ -105,14 +105,15 @@ If browser MCP is unavailable, say so and **do not** claim verified.
 
 ## 4. Before proposing `ready-for-qa` (task includes web)
 
-1. `/deploy` (or its checklist) for touched apps
-2. Repeat the same browser QA against the **deployed** web URL
-   (non-destructive): click primary actions, then visual / console /
-   HTTP again
-3. **Propose** `ready-for-qa` to the main agent with what to inspect —
-   do **not** edit `.cursor/tasks/status.md` (main agent flips the board)
+1. Local browser QA above is green (no production deploy required)
+2. **Propose** `ready-for-qa` to the main agent with what to inspect
+   locally — do **not** edit `.cursor/tasks/status.md` (main agent
+   flips the board)
 
-API-only tasks: backend proposes handoff after `backend-verify` + deploy;
+Do not run `/deploy` unless the user asked. Production smoke is not part
+of task verification.
+
+API-only tasks: backend proposes handoff after local `backend-verify`;
 main agent sets status.
 
 ## Report

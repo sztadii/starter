@@ -68,17 +68,17 @@ Rules:
 
 Do not set `ready-for-qa` until proof passes. Main agent sets the status
 after the role agent reports green. Incomplete or failing FE↔BE proof =
-do not flip the board. Human inspection is product/taste only — never
-the place FE↔BE wiring breaks are found.
+do not flip the board. Human inspection is **local** and product/taste
+only — never the place FE↔BE wiring breaks are found.
 
 | Area | Proof |
 |------|--------|
-| API edits | `backend-verify` (curl) |
-| UI / FE↔BE | `frontend-verify` (browser click + console + HTTP) |
-| Web task | + production browser smoke |
-| API-only task | + production curl smoke |
+| API edits | `backend-verify` (local curl) |
+| UI / FE↔BE | `frontend-verify` (local browser click + console + HTTP) |
 
-Never destructive checks in production.
+Do **not** deploy to production as part of task verification. Ship with
+`/deploy` only when the user asks. Production smoke belongs to that
+command, not to `ready-for-qa`.
 
 ## Main agent implement
 
@@ -123,7 +123,7 @@ Memory never overrides conversation, code, or platform docs.
 | `/init` | Rename from folder, prereqs, Cloudflare, first deploy, private GitHub |
 | `/requirements` | Deep problem analysis → confirm + commit requirements, tech overview, backlog |
 | `/plan-next` | Next slice problem analysis → confirm + commit |
-| `/deploy` | Optional ad-hoc deploy + prod smoke |
+| `/deploy` | User-triggered ship + prod smoke (not part of QA) |
 | `/delete` | Tear down Cloudflare + GitHub |
 | `/next-step` | Approve `ready-for-qa` → `done`, or reject path, or plan next `todo` |
 

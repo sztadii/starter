@@ -45,9 +45,9 @@ agent so it records them.
 5. Run `backend-verify` until green.
 6. When re-delegated after an FE integration repro: fix to match the
    contract, re-run curl, report.
-7. Report to main agent: curl proof, response shapes, blockers. For
-   API-only close-out, include deploy smoke proof and **propose**
-   `ready-for-qa` — do not flip `status.md` yourself.
+7. Report to main agent: local curl proof, response shapes, blockers.
+   For API-only close-out, **propose** `ready-for-qa` — do not flip
+   `status.md` yourself. Do not `/deploy` unless asked.
 
 ## Do not
 

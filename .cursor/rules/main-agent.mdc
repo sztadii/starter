@@ -43,16 +43,21 @@ When calling `backend` or `frontend` (Task / subagent), pass:
   claim FE↔BE verified until curl is green.
 - **No `ready-for-qa` without green FE↔BE** — if browser/HTTP/console
   shows an integration failure, re-delegate and re-verify; never hand
-  wiring bugs to the human. Human inspection is product/taste only.
+  wiring bugs to the human. Human inspection is local product/taste
+  only.
+- **No deploy in the QA loop** — verify locally only. `/deploy` runs
+  only when the user asks to ship.
 
 ## Status board
 
 Only **you** update `.cursor/tasks/status.md`:
 
-- Role agents **verify and propose** handoff (proof + what to inspect)
-- You set `ready-for-qa` after proof looks complete (including green
-  FE↔BE when the task has web), then tell the user to inspect and run
-  `/next-step` to approve (or say what's wrong to reject)
+- Role agents **verify and propose** handoff (local proof + what to
+  inspect)
+- You set `ready-for-qa` after local proof looks complete (including
+  green FE↔BE when the task has web), then tell the user to inspect
+  locally and run `/next-step` to approve (or say what's wrong to
+  reject). Do not require production deploy first.
 - On human reject: `todo` → write memory → re-delegate → verify → you
   set `ready-for-qa` again
 - `/next-step` approve → `done` (see that command)

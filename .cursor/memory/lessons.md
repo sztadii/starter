@@ -9,7 +9,10 @@ prune rules: `.cursor/memory/README.md`.
 
 ## Planning
 
-No lessons yet.
+- **Context:** Workflow felt slow with per-task prod deploy
+  **Wrong:** Required production smoke before every `ready-for-qa`
+  **Right:** Local verify + inspect only; `/deploy` when user asks
+  **Detect:** Tempted to ship mid-task just to close QA
 
 ## Backend
 
