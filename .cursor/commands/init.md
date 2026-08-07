@@ -36,7 +36,7 @@ resources.
 | Kind | Pattern (`thai-restaurant`) |
 | --- | --- |
 | package / D1 / R2 | `thai-restaurant` |
-| Workers | `thai-restaurant-server`, `thai-restaurant-web` |
+| Workers | `thai-restaurant-server`, `thai-restaurant` (web) |
 | KV title | `thai-restaurant-cache` |
 | migrate scripts | `apply thai-restaurant` |
 | `TOKEN_KEY` | `thai_restaurant_token` |

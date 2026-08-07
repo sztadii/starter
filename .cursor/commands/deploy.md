@@ -70,7 +70,7 @@ Do not claim success until these pass. Non-destructive only.
 | Check | Expect |
 | --- | --- |
 | `curl -sS -o /dev/null -w "%{http_code}" "$VITE_API_URL/health"` | `200` |
-| `curl -sS -o /dev/null -w "%{http_code}" "https://<prefix>-web.<account>.workers.dev/"` | `200` |
+| `curl -sS -o /dev/null -w "%{http_code}" "https://<prefix>.<account>.workers.dev/"` | `200` |
 | Init-user login against `$VITE_API_URL` using `INIT_*` from `.env.production` | success (curl; same as `backend-verify`) |
 
 If any check fails: fix, redeploy the affected app, re-smoke. Do not

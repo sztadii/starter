@@ -17,7 +17,7 @@ Tear down remote project resources. Never delete the local workspace.
 
 3. Only after that exact confirmation phrase — skip missing resources —
    delete in order:
-   1. Workers `<prefix>-server`, `<prefix>-web`
+   1. Workers `<prefix>-server`, `<prefix>` (web)
    2. D1 `<prefix>` (real `database_id`, not zero placeholder)
    3. KV `<prefix>-cache` (config `id`)
    4. R2 `<prefix>` (`wrangler r2 bucket delete <prefix>`)
