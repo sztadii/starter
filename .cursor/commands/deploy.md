@@ -29,11 +29,7 @@ assumes bindings already exist with real remote ids.
 4. Wrangler configs have real remote ids (not all-zero placeholders):
    - `apps/server/wrangler.jsonc` — `database_id`, KV `id`, R2 bucket
    - `preview_database_id` stays `local`
-5. Custom domains (required — no `workers.dev`):
-   - `workers_dev` and `preview_urls` are `false` in both apps
-   - Web route: `<prefix>.sztadii.dev` (`custom_domain: true`)
-   - Server route: `<prefix>-server.sztadii.dev` (`custom_domain: true`)
-6. Auth probes:
+5. Auth probes:
    - `cd apps/server && pnpm exec wrangler whoami`
    - `gh` not required for deploy
 
@@ -48,15 +44,15 @@ cd apps/server && pnpm run deploy
 This runs remote D1 migrations, then
 `wrangler deploy --secrets-file .env.production`.
 
-Server URL is always `https://<prefix>-server.sztadii.dev` (not
-workers.dev).
+Capture the workers.dev URL from deploy output
+(e.g. `https://<prefix>-server.<account>.workers.dev`).
 
 ### 2. Sync `VITE_API_URL`
 
-Set root `.env.production` `VITE_API_URL` to
-`https://<prefix>-server.sztadii.dev` (no trailing slash). Re-run
-`pnpm env:link` if app links are missing. Web build reads this at build
-time — must be correct **before** web deploy.
+Set root `.env.production` `VITE_API_URL` to that exact server URL
+(no trailing slash). Re-run `pnpm env:link` if app links are missing.
+Web build reads this at build time — must be correct **before** web
+deploy.
 
 ### 3. Web (build + Worker assets)
 
@@ -65,8 +61,7 @@ cd apps/web && pnpm run deploy
 ```
 
 This runs production build + prerender, then `wrangler deploy`.
-Web URL is always `https://<prefix>.sztadii.dev` (no `-web` in the
-hostname; Worker name may still be `<prefix>-web`).
+Capture the web workers.dev URL.
 
 ## Production smoke (required)
 
@@ -75,7 +70,7 @@ Do not claim success until these pass. Non-destructive only.
 | Check | Expect |
 | --- | --- |
 | `curl -sS -o /dev/null -w "%{http_code}" "$VITE_API_URL/health"` | `200` |
-| `curl -sS -o /dev/null -w "%{http_code}" "https://<prefix>.sztadii.dev/"` | `200` |
+| `curl -sS -o /dev/null -w "%{http_code}" "https://<prefix>-web.<account>.workers.dev/"` | `200` |
 | Init-user login against `$VITE_API_URL` using `INIT_*` from `.env.production` | success (curl; same as `backend-verify`) |
 
 If any check fails: fix, redeploy the affected app, re-smoke. Do not
@@ -89,7 +84,7 @@ on unexpected console/HTTP/UI errors). Curl alone is not enough for web.
 
 Summarize:
 
-- Server URL + web URL (`*.sztadii.dev`)
+- Server URL + web URL
 - Whether `VITE_API_URL` was updated
 - Smoke results (health, web, login; browser if web)
 - Any skipped/missing resources
@@ -103,7 +98,6 @@ Summarize:
 
 - Deploy only one app when both need shipping (unless user explicitly
   scopes to one app — then still sync URL if server changed)
-- Use placeholder JWT or any `workers.dev` URLs in production env
-- Enable `workers_dev` / preview URLs for production apps
+- Use placeholder JWT or example workers.dev URLs in production env
 - Run destructive production checks
 - Create D1/KV/R2 or rename branding (that is `/init`)

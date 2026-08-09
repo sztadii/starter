@@ -37,18 +37,16 @@ resources.
 | --- | --- |
 | package / D1 / R2 | `thai-restaurant` |
 | Workers | `thai-restaurant-server`, `thai-restaurant-web` |
-| Public web URL | `https://thai-restaurant.sztadii.dev` |
-| Public server URL | `https://thai-restaurant-server.sztadii.dev` |
 | KV title | `thai-restaurant-cache` |
 | migrate scripts | `apply thai-restaurant` |
 | `TOKEN_KEY` | `thai_restaurant_token` |
 | init user / password | `thai-restaurant` / `thai-restaurant` |
 | UI / README display | `Thai Restaurant` |
 
-Public URLs always use custom domains on `sztadii.dev`. Never
-`workers.dev`. Web public hostname is `<prefix>` (no `-web`); server
-stays `<prefix>-server`. Worker resource names still keep `-web` /
-`-server`.
+Public URLs use `workers.dev` until a custom domain is added later.
+Capture exact hostnames from wrangler deploy output
+(`https://<prefix>-server.<account>.workers.dev`,
+`https://<prefix>-web.<account>.workers.dev`).
 
 ## 1. Rename starter branding
 
@@ -56,17 +54,11 @@ Do this before any tooling gates.
 
 1. Resolve `<prefix>` from the folder name (above).
 2. Search the repo for `starter` and `Starter` (config, env examples,
-   wrangler `name` + `routes` patterns, web brand, health fallback,
-   SQL seed, docs, migrate scripts).
-3. Rename every hit using the naming map — including init-user SQL seed,
-   `INIT_USERNAME` / `INIT_PASSWORD` (both = `<prefix>`; never
-   `init` / `password`), and custom-domain routes
-   (`starter.sztadii.dev` → `<prefix>.sztadii.dev`,
-   `starter-server.sztadii.dev` → `<prefix>-server.sztadii.dev`).
-   Keep `workers_dev` / `preview_urls` false. Leave
-   `preview_database_id` as `local`.
-4. Update copied/local `.env*` if present the same way
-   (`VITE_API_URL=https://<prefix>-server.sztadii.dev`).
+   web brand, health fallback, SQL seed, docs, migrate scripts).
+3. Rename every hit using the naming map — including init-user SQL seed
+   and `INIT_USERNAME` / `INIT_PASSWORD` (both = `<prefix>`; never
+   `init` / `password`). Leave `preview_database_id` as `local`.
+4. Update copied/local `.env*` if present the same way.
 
 ## 2. Hard gate — local tooling
 
